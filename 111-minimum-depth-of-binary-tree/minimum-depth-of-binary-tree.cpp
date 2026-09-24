@@ -11,28 +11,20 @@
  */
 
 
+ // can also do by bfs as u get leaf node return depth
 class Solution {
 public:
     int minDepth(TreeNode* root) {
+        if(root==NULL)
+        return 0;
 
-        if(root == NULL)
-            return 0;
-        
-        if(root->left == NULL)
-        return 1+ minDepth(root->right);
+        if(root->left == NULL && root->right == NULL)
+        return 1;
 
-        if(root->right == NULL)
-        return 1+minDepth(root->left);
+        int l = root->left != NULL ? minDepth(root->left) : INT_MAX;
+        int r = root->right != NULL ? minDepth(root->right) : INT_MAX;
 
-        return 1 + min(minDepth(root->left),minDepth(root->right));
+        return 1 + min(l,r);
 
-        
     }
 };
-
-// This test case is important
-            //  1
-            //  /
-            //  2
-            //  /
-            //  3
